@@ -49,3 +49,64 @@ ggplot(data = gapminder2, aes(x = year, y = lifeExp, by=continent, color = conti
 
 #theme changes background
 ggplot(data=gapminder, aes(x=year,y=lifeExp, by=country,color=continent))+geom_line()+geom_point()+theme_bw()
+
+
+# draw points on top of lines, black colour for points, only lines' colours are now based on continent  
+ggplot(data = gapminder, aes(x=year, y=lifeExp, by=country)) + geom_line(aes(color=continent)) + geom_point()  
+
+# change colour of all lines to blue (remove aes)
+ggplot(data = gapminder, aes(x=year, y=lifeExp, by=country)) + geom_line(color="blue") + geom_point() 
+
+# switch order of point and line layers from previous example 
+ggplot(data = gapminder, aes(x=year, y=lifeExp, by=country))+ geom_point() + geom_line(color="purple")
+
+# statistical models
+
+ggplot(data=gapminder, aes(x = gdpPercap, y = lifeExp, color = continent)) + geom_point()
+
+# use scale function (change x axis)
+# alpha function (transparency)
+# changes each 1 unit on x-scale to be a factor of 10 
+ggplot(data=gapminder, aes(x = gdpPercap, y = lifeExp,color=continent)) + geom_point(alpha = 0.5) + scale_x_log10()
+
+# geom_smooth 
+ggplot(data=gapminder, aes(x = gdpPercap, y = lifeExp,color=continent)) + geom_point(alpha=0.5) + scale_x_log10()+
+  geom_smooth(method="lm")
+
+# make line thicker 
+ggplot(data=gapminder, aes(x = gdpPercap, y = lifeExp,color=continent)) 
++ geom_point(alpha=0.5) 
++ scale_x_log10()
++ geom_smooth(method="lm",size=1.5)
+
+#modify shape and size of points on the point layer in the previous example 
+test_plot_2<-ggplot(data=gapminder, aes(x = gdpPercap, y = lifeExp,color=continent)) + 
+  geom_point(alpha=0.5,size=2,shape=15) + 
+  scale_x_log10()+ 
+  geom_smooth(method="lm",size=1.5)
+
+
+# save
+ggsave(filename="test.png", plot = test_plot_2, width = 12, height = 10, dpi = 1200, units = "cm")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
